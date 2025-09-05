@@ -102,6 +102,9 @@ from .transformer import (
     TransformerLayer,
 )
 
+from .aod import AODImage, AODFeat
+
+
 __all__ = (
     "Conv",
     "Conv2",

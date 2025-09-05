@@ -1,0 +1,17 @@
+# dehaze_data_min.yaml
+data:
+  data_root: ./../dataset
+
+  train:
+    hazy_images: ./../dataset/haze/train/images
+    clear_images: ./../dataset/clear/train/images
+    labels: ./../dataset/clear/train/labels
+
+  val:
+    hazy_images: ./../dataset/haze/valid/images
+    clear_images: ./../dataset/clear/valid/images
+    labels: ./../dataset/clear/valid/labels
+
+# one-class example
+nc: 1
+names: [car]

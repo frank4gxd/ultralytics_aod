@@ -1,0 +1,13 @@
+# ultralytics basics
+data: dataset_min.yaml   # <-- change me
+model: yolov10n_aod.yaml              # base weights
+imgsz: 640
+batch: 12
+epochs: 200
+device: 0
+amp: true
+
+wandb:
+  enabled: true
+  project: "yolo_dehazing"
+  entity: "self-driving-team"
