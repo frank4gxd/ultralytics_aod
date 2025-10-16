@@ -1,0 +1,21 @@
+# data.yaml (haze-only)
+#path: ./../dataset
+
+#train: haze/train/images
+#val:   haze/valid/images
+
+# (optional)
+# test: haze/test/images
+
+#nc: 1
+#names: [car]
+
+# RTTS / YOLO data config
+path: ./../RTTS                # 根目录（相对 rtts.yaml 的位置），可按需改
+train: train/images  # 你给的路径
+val: valid/images
+test: test/images
+
+# Classes
+nc: 5
+names: [bicycle, bus, car, motorbike, person]

@@ -68,6 +68,14 @@ from ultralytics.nn.modules import (
     YOLOEDetect,
     YOLOESegment,
     v10Detect,
+    AODImage,
+    AODFeat,
+    AODPONONetULY,
+    AODNetPaperULY,
+    YOLOAODLayer,
+    YOLOAODLightweight,
+    AODLayer,
+    AODLightweight,
 )
 from ultralytics.utils import DEFAULT_CFG_DICT, DEFAULT_CFG_KEYS, LOGGER, YAML, colorstr, emojis
 from ultralytics.utils.checks import check_requirements, check_suffix, check_yaml
@@ -1325,9 +1333,9 @@ def temporary_modules(modules=None, attributes=None):
         attributes (dict, optional): A dictionary mapping old module attributes to new module attributes.
 
     Examples:
-        >>> with temporary_modules({"old.module": "new.module"}, {"old.module.attribute": "new.module.attribute"}):
-        >>> import old.module  # this will now import new.module
-        >>> from old.module import attribute  # this will now import new.module.attribute
+  #      >>> with temporary_modules({"old.module": "new.module"}, {"old.module.attribute": "new.module.attribute"}):
+   #     >>> import old.module  # this will now import new.module
+   #     >>> from old.module import attribute  # this will now import new.module.attribute
 
     Note:
         The changes are only in effect inside the context manager and are undone once the context manager exits.
@@ -1622,6 +1630,8 @@ def parse_model(d, ch, verbose=True):
             if "torchvision.ops." in m
             else globals()[m]
         )  # get module
+
+
         for j, a in enumerate(args):
             if isinstance(a, str):
                 with contextlib.suppress(ValueError):
@@ -1694,6 +1704,14 @@ def parse_model(d, ch, verbose=True):
             LOGGER.info(f"{i:>3}{str(f):>20}{n_:>3}{m_.np:10.0f}  {t:<45}{str(args):<30}")  # print
         save.extend(x % i for x in ([f] if isinstance(f, int) else f) if x != -1)  # append to savelist
         layers.append(m_)
+
+        # --- HONOR CUSTOM MODULE CHANNEL HINTS (c2 / out_channels) ---
+        if hasattr(m_, 'c2') and isinstance(m_.c2, int):
+            c2 = int(m_.c2)
+        elif hasattr(m_, 'out_channels') and isinstance(m_.out_channels, int):
+            c2 = int(m_.out_channels)
+        # --- END PATCH ---
+
         if i == 0:
             ch = []
         ch.append(c2)

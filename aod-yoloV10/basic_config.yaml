@@ -1,6 +1,6 @@
 # ultralytics basics
 data: dataset_min.yaml   # <-- change me
-model: yolov10n_aod.yaml              # base weights
+model: yolo12n_aod.yaml              # base weights
 imgsz: 640
 batch: 12
 epochs: 200

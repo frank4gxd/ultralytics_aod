@@ -146,7 +146,7 @@ def main():
 
     # Force YOLOv10n from scratch:
     #   Build from the YAML arch, and pass pretrained=False in train() overrides.
-    model_yaml = "yolov10n_aod.yaml"
+    model_yaml = "yolo12n_aod.yaml"
 
     # W&B
     wb = cfg.get("wandb", {}) or {}

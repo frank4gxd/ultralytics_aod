@@ -1,0 +1,27 @@
+# train_parallel_dino.yaml
+model: ../ultralytics/cfg/models/12/yolo12_parallel_dino.yaml
+data: dataset_dino.yaml
+weights: null
+
+imgsz: 512
+batch: 12
+epochs: 200
+device: "0"
+workers: 8
+amp: true
+
+project: ./runs_cfg
+name: train_parallel_dino
+
+notes: "Parallel DINO fusion experiment on RTTS"
+
+wandb:
+  enabled: true
+  project: "yolo_dehazing"
+  entity: "self-driving-team"
+  log_imgs_per_epoch: 2
+  # any small helper files you want embedded into W&B config for reproducibility:
+  extra_files:
+    - train_parallel_dino.py
+    - parallel_dino.py
+    - yolo12_parallel_dino.yaml
